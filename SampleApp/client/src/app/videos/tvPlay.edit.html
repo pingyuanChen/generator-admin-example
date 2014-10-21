@@ -1,0 +1,136 @@
+<div class="form-wrap">
+  <div class="form-content">
+    <form class="edit-form">
+      
+        <div class="widget-box">
+          <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+            <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+            <h5>基础选项</h5>
+          </div>
+          <div collapse="isCollapse1">
+            <div class="widget-content">
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">视频名称: </label>
+                  <div class="col-sm-6">
+                  
+                    <input type="text" class="form-control" ng-model="entity.title">
+                  
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">视频来源: </label>
+                  <div class="col-sm-6">
+                  
+                    <select ng-model="entity.source">
+                    
+                      <option value="1">土豆</option>
+                    
+                      <option value="2">爱奇艺</option>
+                    
+                      <option value="3">搜狐</option>
+                    
+                      <option value="4">乐视</option>
+                    
+                    </select>
+                  
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">发布状态: </label>
+                  <div class="col-sm-6">
+                  
+                    
+                      <label><input type="radio" ng-model="entity.status" value="1"><span class="form-input-text">发布</span></label>
+                    
+                      <label><input type="radio" ng-model="entity.status" value="2"><span class="form-input-text">未发布</span></label>
+                    
+                  
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">视频类型: </label>
+                  <div class="col-sm-6">
+                  
+                    <input type="hidden" class="checkbox-type" ng-model="entity.type" data-checkbox="冒险,爱情,悬疑" data-column="type">
+                    
+                      <label><input type="checkbox" ng-model="checkbox.type1" ng-change="change('type', 'type1', '冒险')"><span class="form-input-text">冒险</span></label>
+                    
+                      <label><input type="checkbox" ng-model="checkbox.type2" ng-change="change('type', 'type2', '爱情')"><span class="form-input-text">爱情</span></label>
+                    
+                      <label><input type="checkbox" ng-model="checkbox.type3" ng-change="change('type', 'type3', '悬疑')"><span class="form-input-text">悬疑</span></label>
+                    
+                  
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">上映时间: </label>
+                  <div class="col-sm-6">
+                  
+                    <p class="input-group">
+                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="entity.release_time" is-open="release_timeOpened" min-date="'2013-02-01'" max-date="'2015-02-01'" show-button-bar="false" disabled="true" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, 'release_timeOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                  
+                  </div>
+                </div>
+            
+            </div>
+          </div>
+        </div>
+        
+        <div class="widget-box">
+          <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+            <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+            <h5>高级选项</h5>
+          </div>
+          <div collapse="isCollapse2">
+            <div class="widget-content">
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">视频类型: </label>
+                  <div class="col-sm-6">
+                  
+                    <input type="hidden" class="checkbox-type" ng-model="entity.type" data-checkbox="冒险,爱情,悬疑" data-column="type">
+                    
+                      <label><input type="checkbox" ng-model="checkbox.type1" ng-change="change('type', 'type1', '冒险')"><span class="form-input-text">冒险</span></label>
+                    
+                      <label><input type="checkbox" ng-model="checkbox.type2" ng-change="change('type', 'type2', '爱情')"><span class="form-input-text">爱情</span></label>
+                    
+                      <label><input type="checkbox" ng-model="checkbox.type3" ng-change="change('type', 'type3', '悬疑')"><span class="form-input-text">悬疑</span></label>
+                    
+                  
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">发布状态: </label>
+                  <div class="col-sm-6">
+                  
+                    
+                      <label><input type="radio" ng-model="entity.status" value="1"><span class="form-input-text">发布</span></label>
+                    
+                      <label><input type="radio" ng-model="entity.status" value="2"><span class="form-input-text">未发布</span></label>
+                    
+                  
+                  </div>
+                </div>
+            
+            </div>
+          </div>
+        </div>
+        
+    </form>
+  </div>
+  <div class="form-btn-wrap">
+    <button class="btn btn-success right" ng-click="save()">Save</button>
+    <button class="btn btn-default right" ng-click="saveAndContinueEdit()">Save and Continue Editing</button>
+    <button class="btn btn-default right" ng-click="saveAsNew()">Save as new</button>
+  </div>
+</div>

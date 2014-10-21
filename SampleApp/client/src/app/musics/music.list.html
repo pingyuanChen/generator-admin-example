@@ -1,0 +1,86 @@
+<div class="list-wrap">
+  <div class="list-top clearfix">
+  
+    <button class="btn btn-success right" ng-click="addMusic()">Add Music</button>
+  
+  
+    <div class="filter-wrap left">
+    
+      <cascade-dropdown selected-model="selectOptions" select-name="selectName" on-selected="filter(node, isInit)"></cascade-dropdown>
+    
+    </div>
+  
+    <div class="search-wrap left">
+      <button class="btn btn-default right" ng-disabled="isLoading" ng-click="search()">Search</button>
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" type="text" ng-model="search.string">
+          <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-search': !search.string,'glyphicon-remove': search.string}" ng-click="clearSearch()"></span>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  <div class="list-content" cc-loading-layer="!musicTableParams.settings().$loading">
+    <div ng-show="!musicTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
+    <table ng-table="musicTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html">
+      <thead>
+        <tr>
+          <th width="50" header="'ng-table/headers/checkbox.html'">
+            <input type="checkbox" id="select_all" ng-model="checkboxes.checked" />
+          </th>
+        
+          <th>音乐名称</th>
+        
+          <th>音乐来源</th>
+        
+          <th>发布状态</th>
+        
+          <th>音乐类型</th>
+        
+          <th>上映时间</th>
+        
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in items">
+          <td width="50" header="'ng-table/headers/checkbox.html'" class="str-checkbox">
+            <input type="checkbox" ng-model="checkboxes.items[item.id]" />
+          </td>
+      
+        
+          <td><a ng-click="edit(item)">{{item.title}}</a></td>
+        
+      
+        
+          <td>{{item.source}}</td>
+        
+      
+        
+          <td>{{item.status}}</td>
+        
+      
+        
+          <td>{{item.type}}</td>
+        
+      
+        
+          <td>{{item.release_time}}</td>
+        
+      
+          <td data-title="'Actions'" width="180">
+            <a href="" class="btn btn-default" ng-click="saveItem(item)">save</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+    <input type = "checkbox"
+      ng-model = "checkboxes.checked"
+      id = "select_all"
+      name = "filter-checkbox"
+      value = "" / >
+    </script>
+  </div>
+</div>
