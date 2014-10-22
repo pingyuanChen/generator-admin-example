@@ -1,4 +1,4 @@
-define(['common/utils/dataConverter'], function(dataConverter) {
+define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, dataConverter) {
   var diName = 'MovieListCtrl';
   return {
     __register__: function(mod) {
@@ -9,6 +9,8 @@ define(['common/utils/dataConverter'], function(dataConverter) {
 
   function MovieListCtrl($scope, $state, $filter, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
+    $scope.listChecked = [];
+    $scope.listTotal = 0;
 
 
     $scope.addMovie = function() {
@@ -27,12 +29,13 @@ define(['common/utils/dataConverter'], function(dataConverter) {
       save([item.id]);
     };
     $scope.saveAll = function() {
-      var checked = getCheckedValue($scope.checkboxes.items);
-      if(checked.length === 0) {
+      if($scope.listChecked.length === 0) {
         logger.warning('Please select a content!');
         return;
       }
-      save(checked);
+      save($scope.listChecked, function() {
+
+      });
     };
 
     function save(items, callback) {
@@ -71,6 +74,39 @@ define(['common/utils/dataConverter'], function(dataConverter) {
         items: {}
       };
     };
+
+
+    var _dateFormat = function(date) {
+      return dateUtil.format(date, 'YY-MM-dd');
+    };
+    var onChangeDate = function(newDate, oldDate) {
+      if(newDate.getDate() == oldDate.getDate()) {
+        return;
+      }
+      apiParams.start = _dateFormat($scope.datePicker.start.dt);
+      apiParams.end = _dateFormat($scope.datePicker.end.dt);
+      $scope.movieTableParams.page(1);
+      $scope.movieTableParams.reload();
+    };
+    $scope.datePicker = {
+      start: {
+        dt: dateUtil.getRelativeDate(-1, new Date())
+      },
+      end: {
+        max: _dateFormat(new Date()),
+        dt: dateUtil.getRelativeDate(0, new Date())
+      }
+    };
+
+    $scope.$watch('datePicker.start.dt', onChangeDate);
+    $scope.$watch('datePicker.end.dt', onChangeDate);
+
+    $scope.open = function($event, datePickerInput) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      datePickerInput.opened = true;
+    };
+
     // watch for check all checkbox
     $scope.$watch('checkboxes.checked', function(value) {
       if(value === false) {
@@ -100,6 +136,8 @@ define(['common/utils/dataConverter'], function(dataConverter) {
       }
       // grayed checkbox
       angular.element(document.getElementById("select_all")).prop("indeterminate", (checked != 0 && unchecked != 0));
+
+      $scope.listChecked = getCheckedValue($scope.checkboxes.items);
     }, true);
 
     $scope.movieTableParams = new ngTableParams({
@@ -126,6 +164,7 @@ define(['common/utils/dataConverter'], function(dataConverter) {
           }
 
           $scope.items = items;
+          $scope.listTotal = resData.total;
           params.total(resData.total);
           $defer.resolve($scope.items);
           resetCheckBoxes();

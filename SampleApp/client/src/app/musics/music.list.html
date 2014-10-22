@@ -3,7 +3,6 @@
   
     <button class="btn btn-success right" ng-click="addMusic()">Add Music</button>
   
-  
     <div class="filter-wrap left">
     
       <cascade-dropdown selected-model="selectOptions" select-name="selectName" on-selected="filter(node, isInit)"></cascade-dropdown>
@@ -11,15 +10,22 @@
     </div>
   
     <div class="search-wrap left">
-      <button class="btn btn-default right" ng-disabled="isLoading" ng-click="search()">Search</button>
       <div class="form-group">
         <div class="input-group">
           <input class="form-control" type="text" ng-model="search.string">
-          <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-search': !search.string,'glyphicon-remove': search.string}" ng-click="clearSearch()"></span>
+          <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="search()"></span>
         </div>
       </div>
     </div>
   
+  </div>
+  <div class="list-middle clearfix">
+    <div class="list-middle-left left">
+      <span class="list-total-checked">{{listTotal}}中{{listChecked.length}}被选</span>
+    </div>
+    <div class="list-middle-right">
+    
+    </div>
   </div>
   <div class="list-content" cc-loading-layer="!musicTableParams.settings().$loading">
     <div ng-show="!musicTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
@@ -75,6 +81,10 @@
         </tr>
       </tbody>
     </table>
+    <div class="table-footer-btn-wrap left">
+    
+    </div>
+    <span class="list-total">共{{listTotal}}条数据</span>
     <script type="text/ng-template" id="ng-table/headers/checkbox.html">
     <input type = "checkbox"
       ng-model = "checkboxes.checked"

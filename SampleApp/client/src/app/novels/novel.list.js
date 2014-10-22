@@ -1,4 +1,4 @@
-define(['common/utils/dataConverter'], function(dataConverter) {
+define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, dataConverter) {
   var diName = 'NovelListCtrl';
   return {
     __register__: function(mod) {
@@ -9,6 +9,8 @@ define(['common/utils/dataConverter'], function(dataConverter) {
 
   function NovelListCtrl($scope, $state, $filter, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
+    $scope.listChecked = [];
+    $scope.listTotal = 0;
 
 
     $scope.addNovel = function() {
@@ -50,6 +52,8 @@ define(['common/utils/dataConverter'], function(dataConverter) {
         items: {}
       };
     };
+
+
     // watch for check all checkbox
     $scope.$watch('checkboxes.checked', function(value) {
       if(value === false) {
@@ -79,6 +83,8 @@ define(['common/utils/dataConverter'], function(dataConverter) {
       }
       // grayed checkbox
       angular.element(document.getElementById("select_all")).prop("indeterminate", (checked != 0 && unchecked != 0));
+
+      $scope.listChecked = getCheckedValue($scope.checkboxes.items);
     }, true);
 
     $scope.novelTableParams = new ngTableParams({
@@ -105,6 +111,7 @@ define(['common/utils/dataConverter'], function(dataConverter) {
           }
 
           $scope.items = items;
+          $scope.listTotal = resData.total;
           params.total(resData.total);
           $defer.resolve($scope.items);
           resetCheckBoxes();
