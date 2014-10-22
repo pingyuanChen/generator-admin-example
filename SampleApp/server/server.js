@@ -1,5 +1,5 @@
-var path = require('path');
-express = require('express'),
+var path = require('path'),
+  express = require('express'),
   bodyParser = require('body-parser'),
   compression = require('compression'),
   cors = require('cors'),
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(compression());
 app.use(cors());
 app.use(logger('dev'));
-app.use('/', express.static(path.join(__dirname, '../client/src')));
+app.use('/', express.static(path.join(__dirname, '../client/src/')));
 
 router.use(function(req, res, next) {
   console.log('%s %s %s', req.method, req.url, req.path);

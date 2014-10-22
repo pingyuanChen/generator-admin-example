@@ -11,14 +11,14 @@
 //
 // * `$font-size` -- string, $font-size: 24px.
 // * `$line-height` -- string, $line-height: 30px.
-// * `$lines` -- int, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½.
+// * `$lines` -- int, ×î¶àÏÔÊ¾¼¸ÐÐ.
 // * Examples:
 //   @include multi-ellipsis(20px, 30px, 2, true);
 @mixin multi-ellipsis($font-size, $line-height, $lines, $is-adaptive: false){
   $font-size: unquote($font-size);
   $line-height: unquote($line-height);
   @if $is-adaptive {
-    //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ß¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
+    //ÈÝÆ÷µÄ¸ß¶ÈËæ×ÅÎÄ×ÖµÄ¶àÉÙ×ÔÊÊÓ¦
     max-height: $line-height * $lines;
   }
   @else{

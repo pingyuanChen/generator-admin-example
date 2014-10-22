@@ -846,4 +846,9 @@ input[type=checkbox] {
 
 /* line 78, ../scss/app.scss */
 .search-wrap .form-control-feedback {
-  top: 3px; }
+  top: 1px;
+  border-left: 1px solid #ddd;
+  line-height: 34px; }
+/* line 83, ../scss/app.scss */
+.search-wrap .form-control-feedback:hover {
+  background: #5cb85c; }
