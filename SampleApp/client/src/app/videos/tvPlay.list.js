@@ -2,16 +2,19 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
   var diName = 'TvPlayListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$state', '$filter', 'ngTableParams', 'ds.tvPlay', 'logger', 'apiService', 'PER_PAGE', TvPlayListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.tvPlay', 'logger', 'apiService', 'PER_PAGE', TvPlayListCtrl]);
       return mod;
     }
   };
 
-  function TvPlayListCtrl($scope, $state, $filter, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function TvPlayListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
 
+    $scope.isPopup = function() {
+      return !!$location.search().popup;
+    };
 
     $scope.addTvPlay = function() {
       $state.go('videos.add-tv-play');
@@ -19,6 +22,21 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
 
 
     $scope.edit = function(item) {
+      if($location.search().popup) {
+        var windowScope = $window.opener.angular.element('body').scope(),
+          childWindowName = $window.window.name;
+
+        if(childWindowName == 'from-ref') {
+          windowScope.$broadcast('REF_LIST_SELECTED', {
+            id: item.id
+          });
+        } else {
+          windowScope.$broadcast('INLINE_REF_LIST_SELECTED', {
+            id: item.id
+          });
+        }
+        $window.close();
+      }
       $state.go('videos.edit-tv-play', {
         id: item.id
       });

@@ -1,13 +1,13 @@
 define([], function() {
-  var diName = 'MusicEditCtrl';
+  var diName = 'RulesEditCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$rootScope', '$scope', '$state', '$window', '$location', 'ds.music', '$log', MusicEditCtrl]);
+      mod.controller(diName, ['$rootScope', '$scope', '$state', '$window', '$location', 'ds.rules', '$log', RulesEditCtrl]);
       return mod;
     }
   };
 
-  function MusicEditCtrl($rootScope, $scope, $state, $window, $location, DS, $log) {
+  function RulesEditCtrl($rootScope, $scope, $state, $window, $location, DS, $log) {
     var stateParams = $state.params,
       isEditState = _.has(stateParams, 'id'),
       curRefItem, curRefIndex;

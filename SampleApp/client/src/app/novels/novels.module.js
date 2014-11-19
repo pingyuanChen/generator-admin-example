@@ -1,12 +1,14 @@
 define([
   './novels.config',
   'common/utils/registerToModule',
+  './categories.list',
+  './categories.edit',
   './novel.list',
   './novel.edit'
-], function(novelsConfig, rtm, NovelListCtrl, NovelEditCtrl) /*invoke*/ {
+], function(novelsConfig, rtm, CategoriesListCtrl, CategoriesEditCtrl, NovelListCtrl, NovelEditCtrl) /*invoke*/ {
   var modName = 'app.novels',
     mod = angular.module(modName, []);
-  rtm(NovelListCtrl, NovelEditCtrl)(mod);
+  rtm(CategoriesListCtrl, CategoriesEditCtrl, NovelListCtrl, NovelEditCtrl)(mod);
   novelsConfig(mod);
   return modName;
 });

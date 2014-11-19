@@ -11,8 +11,11 @@
             <div class="widget-content">
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">视频名称: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     <input type="text" class="form-control" ng-model="entity.title">
                   
@@ -20,8 +23,11 @@
                 </div>
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">视频来源: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     <select ng-model="entity.source">
                     
@@ -39,8 +45,11 @@
                 </div>
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">发布状态: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     
                       <label><input type="radio" ng-model="entity.status" value="发布"><span class="form-input-text">发布</span></label>
@@ -52,8 +61,11 @@
                 </div>
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">视频类型: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     <input type="hidden" class="checkbox-type" ng-model="entity.type" data-checkbox="冒险,爱情,悬疑" data-column="type">
                     
@@ -68,8 +80,24 @@
                 </div>
             
                 <div class="form-group">
+                  
+                  <label class="col-sm-2 control-label">分类: </label>
+                  <div class="col-sm-6">
+                  
+
+                  
+                    <input type="text" class="form-control" ng-model="entity.categories">
+                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUpList('novels', 'categories')"></span>
+                  
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">上映时间: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="entity.release_time" is-open="release_timeOpened" min-date="'2013-02-01'" max-date="'2015-02-01'" show-button-bar="false" disabled="true" />
@@ -82,8 +110,11 @@
                 </div>
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">视频类型: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     <label><input type="checkbox" ng-model="entity.is_hot"><span class="form-input-text">是否推荐</span></label>
                   
@@ -103,8 +134,11 @@
             <div class="widget-content">
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">视频类型: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     <input type="hidden" class="checkbox-type" ng-model="entity.type" data-checkbox="冒险,爱情,悬疑" data-column="type">
                     
@@ -119,14 +153,133 @@
                 </div>
             
                 <div class="form-group">
+                  
                   <label class="col-sm-2 control-label">发布状态: </label>
                   <div class="col-sm-6">
+                  
+
                   
                     
                       <label><input type="radio" ng-model="entity.status" value="发布"><span class="form-input-text">发布</span></label>
                     
                       <label><input type="radio" ng-model="entity.status" value="未发布"><span class="form-input-text">未发布</span></label>
                     
+                  
+                  </div>
+                </div>
+            
+            </div>
+          </div>
+        </div>
+        
+        <div class="widget-box">
+          <div class="widget-title" ng-click="isCollapse3 = !isCollapse3">
+            <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+            <h5>Rules</h5>
+          </div>
+          <div collapse="isCollapse3">
+            <div class="widget-content">
+            
+                <div class="form-group">
+                  
+                  <div class="inline-ref-table">
+                  
+
+                  
+                    <table class="table table-bordered ref-table ref-rules">
+                      <thead>
+                        <tr>
+                          <th>rules</th>
+                          <th>Delete?</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="refItem in entity.rules">
+                          <td>
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem.id">
+                            <div class="ref-btn-wrap">
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', $index)"></span>
+                              <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'other', 'rules', $index, refItem.id)"></span>
+                              <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'rules', $index)"></span>
+                            </div>
+                          </td>
+                          <td class="ref-actions">
+                            <input type="checkbox" ng-model="refItem.isDelete">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.rules[entity.rules.length].id">
+                            <div class="ref-btn-wrap">
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', entity.rules.length)"></span>
+                              <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.rules.length.id" ng-click="popUp('edit', 'other', 'rules', entity.rules.length, entity.rules.length.id)"></span>
+                              <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'rules', entity.rules.length)"></span>
+                            </div>
+                          </td>
+                          <td class="ref-actions">
+                            <input type="checkbox">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  
+                  </div>
+                </div>
+            
+            </div>
+          </div>
+        </div>
+        
+        <div class="widget-box">
+          <div class="widget-title" ng-click="isCollapse4 = !isCollapse4">
+            <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+            <h5>Folder</h5>
+          </div>
+          <div collapse="isCollapse4">
+            <div class="widget-content">
+            
+                <div class="form-group">
+                  
+                  <div class="inline-ref-table">
+                  
+
+                  
+                    <table class="table table-bordered ref-table ref-folders">
+                      <thead>
+                        <tr>
+                          <th>folders</th>
+                          <th>Delete?</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="refItem in entity.folders">
+                          <td>
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem.id">
+                            <div class="ref-btn-wrap">
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', $index)"></span>
+                              <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'other', 'folders', $index, refItem.id)"></span>
+                              <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'folders', $index)"></span>
+                            </div>
+                          </td>
+                          <td class="ref-actions">
+                            <input type="checkbox" ng-model="refItem.isDelete">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.folders[entity.folders.length].id">
+                            <div class="ref-btn-wrap">
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', entity.folders.length)"></span>
+                              <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.folders.length.id" ng-click="popUp('edit', 'other', 'folders', entity.folders.length, entity.folders.length.id)"></span>
+                              <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'folders', entity.folders.length)"></span>
+                            </div>
+                          </td>
+                          <td class="ref-actions">
+                            <input type="checkbox">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   
                   </div>
                 </div>

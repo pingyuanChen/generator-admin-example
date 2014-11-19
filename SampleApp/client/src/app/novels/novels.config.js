@@ -8,6 +8,33 @@ define([], function() {
             url: '/novels',
             template: '<ui-view/>'
           })
+          .state('novels.categories', {
+            url: '/categories',
+            templateUrl: 'app/novels/categories.list.html',
+            data: {
+              model: 'categories',
+              action: ['list']
+            },
+            controller: 'CategoriesListCtrl'
+          })
+          .state('novels.add-categories', {
+            url: '/categories/add',
+            templateUrl: 'app/novels/categories.edit.html',
+            data: {
+              model: 'categories',
+              action: ['add']
+            },
+            controller: 'CategoriesEditCtrl'
+          })
+          .state('novels.edit-categories', {
+            url: '/categories/:id',
+            templateUrl: 'app/novels/categories.edit.html',
+            data: {
+              model: 'categories',
+              action: ['edit']
+            },
+            controller: 'CategoriesEditCtrl'
+          })
           .state('novels.novel', {
             url: '/novel',
             templateUrl: 'app/novels/novel.list.html',

@@ -58,6 +58,29 @@ a:hover {
   float: left;
   width: 280px; }
 
+/* line 55, ../scss/partials/_button.scss */
+.col-sm-6 {
+  position: relative; }
+
+/* line 58, ../scss/partials/_button.scss */
+.ref-icon.glyphicon {
+  position: absolute;
+  right: -25px;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center; }
+
+/* line 66, ../scss/partials/_button.scss */
+.ref-btn-wrap {
+  display: inline-block;
+  line-height: 34px; }
+/* line 69, ../scss/partials/_button.scss */
+.ref-btn-wrap .glyphicon {
+  width: 28px;
+  line-height: 34px;
+  text-align: center; }
+
 /* line 2, ../scss/partials/_table.scss */
 thead {
   background: #efefef; }
@@ -162,6 +185,15 @@ a.btn.btn-default {
   padding: 0 6px;
   vertical-align: middle; }
 
+/* line 91, ../scss/partials/_table.scss */
+.form-control.inline-ref-input-cell {
+  float: left;
+  width: 350px; }
+
+/* line 95, ../scss/partials/_table.scss */
+.inline-ref-table table {
+  width: 100%; }
+
 /* line 1, ../scss/partials/_form.scss */
 select {
   min-width: 100px;
@@ -216,7 +248,7 @@ select {
   width: 16px; }
 /* line 46, ../scss/partials/_form.scss */
 .form-group .input-group .dropdown-menu {
-  left: initial;
+  left: initial !important;
   right: 0; }
 
 /* Widgets */
@@ -844,11 +876,20 @@ input[type=checkbox] {
   margin-left: 220px;
   padding: 15px 20px; }
 
-/* line 78, ../scss/app.scss */
+/* line 76, ../scss/app.scss */
+.popup .main-content {
+  margin-left: 0; }
+
+/* line 79, ../scss/app.scss */
+.popup .leftnav {
+  display: none; }
+
+/* line 84, ../scss/app.scss */
 .search-wrap .form-control-feedback {
   top: 1px;
   border-left: 1px solid #ddd;
   line-height: 34px; }
-/* line 83, ../scss/app.scss */
+/* line 89, ../scss/app.scss */
 .search-wrap .form-control-feedback:hover {
-  background: #5cb85c; }
+  background: #5cb85c;
+  color: #fff; }

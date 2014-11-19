@@ -1,13 +1,13 @@
 define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, dataConverter) {
-  var diName = 'MovieListCtrl';
+  var diName = 'FoldersListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.movie', 'logger', 'apiService', 'PER_PAGE', MovieListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.folders', 'logger', 'apiService', 'PER_PAGE', FoldersListCtrl]);
       return mod;
     }
   };
 
-  function MovieListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function FoldersListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
@@ -16,8 +16,8 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       return !!$location.search().popup;
     };
 
-    $scope.addMovie = function() {
-      $state.go('videos.add-movie');
+    $scope.addFolders = function() {
+      $state.go('other.add-folders');
     };
 
 
@@ -37,41 +37,22 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
         }
         $window.close();
       }
-      $state.go('videos.edit-movie', {
+      $state.go('other.edit-folders', {
         id: item.id
       });
     };
 
 
-    $scope.saveItem = function(item) {
-      save([item.id]);
-    };
-    $scope.saveAll = function() {
-      if($scope.listChecked.length === 0) {
-        logger.warning('Please select a content!');
-        return;
-      }
-      save($scope.listChecked, function() {
 
+
+    $scope.filter = function() {
+      var curOption = _.find($scope.filterData.values, function(item) {
+        return item.value = $scope.filterModel;
       });
-    };
-
-    function save(items, callback) {
-      DS.add(items)
-        .then(function() {
-          callback && callback();
-        }, function(error) {
-          //save failed
-        });
-    }
-
-
-
-    $scope.filter = function(node, isInit) {
-      if(!isInit) {
-        apiParams = node.selectedValue;
-        $scope.movieTableParams.page(1);
-        $scope.movieTableParams.reload();
+      if(curOption) {
+        apiParams[curOption.name] = curOption.value;
+        $scope.foldersTableParams.page(1);
+        $scope.foldersTableParams.reload();
       }
     };
 
@@ -82,8 +63,8 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     };
     $scope.search = function() {
       apiParams.searchKeyword = $scope.search.string;
-      $scope.movieTableParams.page(1);
-      $scope.movieTableParams.reload();
+      $scope.foldersTableParams.page(1);
+      $scope.foldersTableParams.reload();
     };
 
     var resetCheckBoxes = function() {
@@ -93,37 +74,6 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       };
     };
 
-
-    var _dateFormat = function(date) {
-      return dateUtil.format(date, 'YY-MM-dd');
-    };
-    var onChangeDate = function(newDate, oldDate) {
-      if(newDate.getDate() == oldDate.getDate()) {
-        return;
-      }
-      apiParams.start = _dateFormat($scope.datePicker.start.dt);
-      apiParams.end = _dateFormat($scope.datePicker.end.dt);
-      $scope.movieTableParams.page(1);
-      $scope.movieTableParams.reload();
-    };
-    $scope.datePicker = {
-      start: {
-        dt: dateUtil.getRelativeDate(-1, new Date())
-      },
-      end: {
-        max: _dateFormat(new Date()),
-        dt: dateUtil.getRelativeDate(0, new Date())
-      }
-    };
-
-    $scope.$watch('datePicker.start.dt', onChangeDate);
-    $scope.$watch('datePicker.end.dt', onChangeDate);
-
-    $scope.open = function($event, datePickerInput) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      datePickerInput.opened = true;
-    };
 
     // watch for check all checkbox
     $scope.$watch('checkboxes.checked', function(value) {
@@ -158,7 +108,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       $scope.listChecked = getCheckedValue($scope.checkboxes.items);
     }, true);
 
-    $scope.movieTableParams = new ngTableParams({
+    $scope.foldersTableParams = new ngTableParams({
       page: 1,
       count: PER_PAGE
     }, {
@@ -175,11 +125,8 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
             items = resData.items;
           filterData = resData.filters;
 
-          if(!$scope.selectName) {
-            var convertedData = dataConverter.filter(filterData);
-            $scope.selectName = convertedData.selectName;
-            $scope.selectOptions = convertedData.selectOptions;
-          }
+          $scope.filterData = dataConverter.simpleFilter(filterData);
+          $scope.filterModel = $scope.filterData.defaultOption;
 
           $scope.items = items;
           $scope.listTotal = resData.total;

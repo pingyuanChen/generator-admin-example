@@ -2,16 +2,19 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
   var diName = 'NovelListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$state', '$filter', 'ngTableParams', 'ds.novel', 'logger', 'apiService', 'PER_PAGE', NovelListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.novel', 'logger', 'apiService', 'PER_PAGE', NovelListCtrl]);
       return mod;
     }
   };
 
-  function NovelListCtrl($scope, $state, $filter, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function NovelListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
 
+    $scope.isPopup = function() {
+      return !!$location.search().popup;
+    };
 
     $scope.addNovel = function() {
       $state.go('novels.add-novel');
@@ -19,6 +22,21 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
 
 
     $scope.edit = function(item) {
+      if($location.search().popup) {
+        var windowScope = $window.opener.angular.element('body').scope(),
+          childWindowName = $window.window.name;
+
+        if(childWindowName == 'from-ref') {
+          windowScope.$broadcast('REF_LIST_SELECTED', {
+            id: item.id
+          });
+        } else {
+          windowScope.$broadcast('INLINE_REF_LIST_SELECTED', {
+            id: item.id
+          });
+        }
+        $window.close();
+      }
       $state.go('novels.edit-novel', {
         id: item.id
       });
