@@ -64,12 +64,6 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       $scope.novelTableParams.reload();
     };
 
-    var resetCheckBoxes = function() {
-      $scope.checkboxes = {
-        'checked': false,
-        items: {}
-      };
-    };
 
 
     // watch for check all checkbox
@@ -150,5 +144,12 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       }
       return checked;
     }
+
+    function resetCheckBoxes() {
+      $scope.checkboxes = {
+        'checked': false,
+        items: {}
+      };
+    };
   }
 })
