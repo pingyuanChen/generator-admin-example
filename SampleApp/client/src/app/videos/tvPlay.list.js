@@ -2,12 +2,12 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
   var diName = 'TvPlayListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.tvPlay', 'logger', 'apiService', 'PER_PAGE', TvPlayListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', '$modal', 'ngTableParams', 'ds.tvPlay', 'logger', 'apiService', 'PER_PAGE', TvPlayListCtrl]);
       return mod;
     }
   };
 
-  function TvPlayListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function TvPlayListCtrl($scope, $window, $state, $filter, $location, $modal, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
@@ -41,6 +41,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
         id: item.id
       });
     };
+
 
 
 

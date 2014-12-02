@@ -80,5 +80,5 @@
     "基础选项": ["title", "source", "status", "type", "release_time"],
     "高级选项": ["type", "status"]
   },
-  "list_actions": ["add", "save"]
+  "list_actions": ["add", "save", "delete"]
 }

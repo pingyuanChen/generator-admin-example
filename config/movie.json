@@ -116,5 +116,5 @@
     "Rules": ["rules"],
     "Folder": ["folders"]
   },
-  "list_actions": ["add", "save"]
+  "list_actions": ["add", "save", "delete"]
 }

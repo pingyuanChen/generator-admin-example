@@ -2,12 +2,12 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
   var diName = 'NovelListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.novel', 'logger', 'apiService', 'PER_PAGE', NovelListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', '$modal', 'ngTableParams', 'ds.novel', 'logger', 'apiService', 'PER_PAGE', NovelListCtrl]);
       return mod;
     }
   };
 
-  function NovelListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function NovelListCtrl($scope, $window, $state, $filter, $location, $modal, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
@@ -41,6 +41,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
         id: item.id
       });
     };
+
 
 
 

@@ -599,18 +599,19 @@ cc-tree li i, cc-tree li .tree-label {
 /* line 2, ../scss/partials/_filter.scss */
 .filter-wrap {
   height: 34px;
-  line-height: 34px; }
-/* line 5, ../scss/partials/_filter.scss */
+  line-height: 34px;
+  margin-right: 8px; }
+/* line 6, ../scss/partials/_filter.scss */
 .filter-wrap select {
   background: #eeeeee; }
 
-/* line 10, ../scss/partials/_filter.scss */
+/* line 11, ../scss/partials/_filter.scss */
 .list-top .form-inline .form-control {
   background: #eee; }
-/* line 13, ../scss/partials/_filter.scss */
+/* line 14, ../scss/partials/_filter.scss */
 .list-top .input-group-btn button {
   background: #efefef; }
-/* line 15, ../scss/partials/_filter.scss */
+/* line 16, ../scss/partials/_filter.scss */
 .list-top .input-group-btn button:hover {
   background: #28B779;
   border-color: #ccc; }

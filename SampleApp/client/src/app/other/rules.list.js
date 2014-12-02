@@ -2,12 +2,12 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
   var diName = 'RulesListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.rules', 'logger', 'apiService', 'PER_PAGE', RulesListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', '$modal', 'ngTableParams', 'ds.rules', 'logger', 'apiService', 'PER_PAGE', RulesListCtrl]);
       return mod;
     }
   };
 
-  function RulesListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function RulesListCtrl($scope, $window, $state, $filter, $location, $modal, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
@@ -41,6 +41,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
         id: item.id
       });
     };
+
 
 
 

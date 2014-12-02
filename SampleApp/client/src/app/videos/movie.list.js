@@ -2,12 +2,12 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
   var diName = 'MovieListCtrl';
   return {
     __register__: function(mod) {
-      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', 'ngTableParams', 'ds.movie', 'logger', 'apiService', 'PER_PAGE', MovieListCtrl]);
+      mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', '$modal', 'ngTableParams', 'ds.movie', 'logger', 'apiService', 'PER_PAGE', MovieListCtrl]);
       return mod;
     }
   };
 
-  function MovieListCtrl($scope, $window, $state, $filter, $location, ngTableParams, DS, logger, apiService, PER_PAGE) {
+  function MovieListCtrl($scope, $window, $state, $filter, $location, $modal, ngTableParams, DS, logger, apiService, PER_PAGE) {
     var apiParams = {};
     $scope.listChecked = [];
     $scope.listTotal = 0;
@@ -43,8 +43,51 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     };
 
 
+    $scope.delete = function() {
+      var deleteDialog;
+      if($scope.listChecked.length === 0) {
+        logger.warning('Please select a content!');
+        return;
+      }
+      deleteDialog = $modal.open({
+        template: '<div class="modal-header">' +
+          '<a class="dialog-cancel" ng-click="cancel()">' +
+          '<span class="glyphicon glyphicon-remove"></span>' +
+          '</a>' +
+          '<h3 class="modal-title">delete action</h3>' +
+          '</div>' +
+          '<div class="modal-body">Are you absolutely sure you want to delete?</div>' +
+          '<div class="modal-footer">' +
+          '<button type="btn" class="btn btn-default" ng-click="cancel()">Close</button>' +
+          '<button class="btn btn-primary" ng-click="deleteAction()">Yes</button>' +
+          '</div>',
+        scope: $scope,
+        controller: ['$scope', '$modalInstance', 'ds.movie', function($scope, $modalInstance, DS) {
+          $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+
+          $scope.deleteAction = function() {
+            DS.delete($scope.listChecked)
+              .then(function() {
+                $modalInstance.dismiss('cancel');
+                $scope.movieTableParams.page(1);
+                $scope.movieTableParams.reload();
+                logger.success('delete successfully');
+              }, function(error) {
+                $modalInstance.dismiss('cancel');
+                logger.error('delete failed.');
+              });
+          };
+        }]
+      });
+    };
+
+
     $scope.saveItem = function(item) {
-      save([item.id]);
+      save([item.id], function() {
+
+      });
     };
     $scope.saveAll = function() {
       if($scope.listChecked.length === 0) {
