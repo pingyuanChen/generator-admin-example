@@ -43,18 +43,62 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     };
 
 
-
-
-
-    $scope.filter = function() {
-      var curOption = _.find($scope.filterData.values, function(item) {
-        return item.value = $scope.filterModel;
-      });
-      if(curOption) {
-        apiParams[curOption.name] = curOption.value;
-        $scope.tvPlayTableParams.page(1);
-        $scope.tvPlayTableParams.reload();
+    $scope.delete = function() {
+      var deleteDialog;
+      if($scope.listChecked.length === 0) {
+        logger.warning('Please select a content!');
+        return;
       }
+      deleteDialog = $modal.open({
+        template: '<div class="modal-header">' +
+          '<a class="dialog-cancel" ng-click="cancel()">' +
+          '<span class="glyphicon glyphicon-remove"></span>' +
+          '</a>' +
+          '<h3 class="modal-title">delete action</h3>' +
+          '</div>' +
+          '<div class="modal-body">Are you absolutely sure you want to delete?</div>' +
+          '<div class="modal-footer">' +
+          '<button type="btn" class="btn btn-default" ng-click="cancel()">Close</button>' +
+          '<button class="btn btn-primary" ng-click="deleteAction()">Yes</button>' +
+          '</div>',
+        scope: $scope,
+        controller: ['$scope', '$modalInstance', 'ds.tvPlay', function($scope, $modalInstance, DS) {
+          $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+
+          $scope.deleteAction = function() {
+            DS.delete($scope.listChecked)
+              .then(function() {
+                $modalInstance.dismiss('cancel');
+                $scope.tvPlayTableParams.page(1);
+                $scope.tvPlayTableParams.reload();
+                logger.success('delete successfully');
+              }, function(error) {
+                $modalInstance.dismiss('cancel');
+                logger.error('delete failed.');
+              });
+          };
+        }]
+      });
+    };
+
+    function save(items, callback) {
+      DS.update(items)
+        .then(function() {
+          callback && callback();
+        }, function(error) {
+          //save failed
+        });
+    }
+
+
+
+    $scope.filter = function(node) {
+      var selectedValue = node.selectedValue;
+      _.extend(apiParams, selectedValue);
+      $scope.tvPlayTableParams.page(1);
+      $scope.tvPlayTableParams.reload();
     };
 
 
@@ -62,7 +106,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.clearSearch = function() {
       $scope.search.string = '';
     };
-    $scope.search = function() {
+    $scope.goSearch = function() {
       apiParams.searchKeyword = $scope.search.string;
       $scope.tvPlayTableParams.page(1);
       $scope.tvPlayTableParams.reload();
@@ -120,8 +164,10 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
             items = resData.items;
           filterData = resData.filters;
 
-          $scope.filterData = dataConverter.simpleFilter(filterData);
-          $scope.filterModel = $scope.filterData.defaultOption;
+          if(!$scope.selectOptions) {
+            //only assign at first time, because it would cause dpMultiDropdown model change and reset default value
+            $scope.selectOptions = filterData;
+          }
 
           $scope.items = items;
           $scope.listTotal = resData.total;

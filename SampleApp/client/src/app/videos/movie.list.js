@@ -83,12 +83,15 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       });
     };
 
+    function save(items, callback) {
+      DS.update(items)
+        .then(function() {
+          callback && callback();
+        }, function(error) {
+          //save failed
+        });
+    }
 
-    $scope.saveItem = function(item) {
-      save([item.id], function() {
-
-      });
-    };
     $scope.saveAll = function() {
       if($scope.listChecked.length === 0) {
         logger.warning('Please select a content!');
@@ -100,20 +103,20 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       });
     };
 
-    function save(items, callback) {
-      DS.update(items)
-        .then(function() {
-          callback && callback();
-        }, function(error) {
-          //save failed
-        });
-    }
 
+    $scope.save = function(item) {
+      save([item.id], function() {
+
+      });
+    };
+
+    //TODO
+    $scope.viewDetail = function(item) {};
 
 
     $scope.filter = function(node, isInit) {
       if(!isInit) {
-        apiParams = node.selectedValue;
+        _.extend(apiParams, node.selectedValue);
         $scope.movieTableParams.page(1);
         $scope.movieTableParams.reload();
       }
@@ -124,7 +127,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.clearSearch = function() {
       $scope.search.string = '';
     };
-    $scope.search = function() {
+    $scope.goSearch = function() {
       apiParams.searchKeyword = $scope.search.string;
       $scope.movieTableParams.page(1);
       $scope.movieTableParams.reload();

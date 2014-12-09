@@ -43,12 +43,63 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     };
 
 
+    $scope.delete = function() {
+      var deleteDialog;
+      if($scope.listChecked.length === 0) {
+        logger.warning('Please select a content!');
+        return;
+      }
+      deleteDialog = $modal.open({
+        template: '<div class="modal-header">' +
+          '<a class="dialog-cancel" ng-click="cancel()">' +
+          '<span class="glyphicon glyphicon-remove"></span>' +
+          '</a>' +
+          '<h3 class="modal-title">delete action</h3>' +
+          '</div>' +
+          '<div class="modal-body">Are you absolutely sure you want to delete?</div>' +
+          '<div class="modal-footer">' +
+          '<button type="btn" class="btn btn-default" ng-click="cancel()">Close</button>' +
+          '<button class="btn btn-primary" ng-click="deleteAction()">Yes</button>' +
+          '</div>',
+        scope: $scope,
+        controller: ['$scope', '$modalInstance', 'ds.music', function($scope, $modalInstance, DS) {
+          $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
 
+          $scope.deleteAction = function() {
+            DS.delete($scope.listChecked)
+              .then(function() {
+                $modalInstance.dismiss('cancel');
+                $scope.musicTableParams.page(1);
+                $scope.musicTableParams.reload();
+                logger.success('delete successfully');
+              }, function(error) {
+                $modalInstance.dismiss('cancel');
+                logger.error('delete failed.');
+              });
+          };
+        }]
+      });
+    };
+
+    function save(items, callback) {
+      DS.update(items)
+        .then(function() {
+          callback && callback();
+        }, function(error) {
+          //save failed
+        });
+    }
+
+
+    //TODO
+    $scope.viewDetail = function(item) {};
 
 
     $scope.filter = function(node, isInit) {
       if(!isInit) {
-        apiParams = node.selectedValue;
+        _.extend(apiParams, node.selectedValue);
         $scope.musicTableParams.page(1);
         $scope.musicTableParams.reload();
       }
@@ -59,7 +110,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.clearSearch = function() {
       $scope.search.string = '';
     };
-    $scope.search = function() {
+    $scope.goSearch = function() {
       apiParams.searchKeyword = $scope.search.string;
       $scope.musicTableParams.page(1);
       $scope.musicTableParams.reload();

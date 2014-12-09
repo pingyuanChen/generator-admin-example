@@ -6,6 +6,7 @@
       "name": "title",
       "alias": "视频名称",
       "display_as": "input",
+      "placeholder": "冰川时代",
       "rules": 100
     },
     {
@@ -109,12 +110,13 @@
   "list_editable": ["director"],
   "list_per_page": 10,
   "list_datepicker": "release_time",
-  "search_field": ["title"],
+  "search_field": true,
   "fieldsets": {
     "基础选项": ["title", "source", "status", "type", "categories", "release_time", "is_hot"],
     "高级选项": ["type", "status"],
     "Rules": ["rules"],
     "Folder": ["folders"]
   },
-  "list_actions": ["add", "save", "delete"]
+  "list_actions": ["add", "delete"],
+  "list_table_actions": ["save", "viewDetail"]
 }

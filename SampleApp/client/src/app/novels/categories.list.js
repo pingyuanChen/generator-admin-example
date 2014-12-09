@@ -83,12 +83,20 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
       });
     };
 
+    function save(items, callback) {
+      DS.update(items)
+        .then(function() {
+          callback && callback();
+        }, function(error) {
+          //save failed
+        });
+    }
 
 
 
     $scope.filter = function(node, isInit) {
       if(!isInit) {
-        apiParams = node.selectedValue;
+        _.extend(apiParams, node.selectedValue);
         $scope.categoriesTableParams.page(1);
         $scope.categoriesTableParams.reload();
       }
@@ -99,7 +107,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.clearSearch = function() {
       $scope.search.string = '';
     };
-    $scope.search = function() {
+    $scope.goSearch = function() {
       apiParams.searchKeyword = $scope.search.string;
       $scope.categoriesTableParams.page(1);
       $scope.categoriesTableParams.reload();

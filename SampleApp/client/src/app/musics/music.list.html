@@ -13,7 +13,7 @@
       <div class="form-group">
         <div class="input-group">
           <input class="form-control" type="text" ng-model="search.string">
-          <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="search()"></span>
+          <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
         </div>
       </div>
     </div>
@@ -21,6 +21,8 @@
   </div>
   <div class="list-middle clearfix">
     <div class="list-middle-left left">
+    
+      <button ng-show="!isPopup()" class="btn btn-default" ng-click="delete()">delete</button>
     
       <span class="list-total-checked">{{listTotal}}中{{listChecked.length}}被选</span>
     </div>
@@ -47,7 +49,9 @@
         
           <th>上映时间</th>
         
+        
           <th>Actions</th>
+        
         </tr>
       </thead>
       <tbody>
@@ -76,9 +80,13 @@
           <td>{{item.release_time}}</td>
         
       
-          <td data-title="'Actions'" width="180">
-            <a href="" class="btn btn-default" ng-click="saveItem(item)">save</a>
+      
+          <td data-title="'Actions'" class="list-table-actions-col">
+            
+              <a href="" class="btn btn-default left" ng-click="viewDetail(item)">viewDetail</a>
+            
           </td>
+      
         </tr>
       </tbody>
     </table>

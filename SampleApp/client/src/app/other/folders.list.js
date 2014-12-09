@@ -43,18 +43,22 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     };
 
 
+    function save(items, callback) {
+      DS.update(items)
+        .then(function() {
+          callback && callback();
+        }, function(error) {
+          //save failed
+        });
+    }
 
 
 
-    $scope.filter = function() {
-      var curOption = _.find($scope.filterData.values, function(item) {
-        return item.value = $scope.filterModel;
-      });
-      if(curOption) {
-        apiParams[curOption.name] = curOption.value;
-        $scope.foldersTableParams.page(1);
-        $scope.foldersTableParams.reload();
-      }
+    $scope.filter = function(node) {
+      var selectedValue = node.selectedValue;
+      _.extend(apiParams, selectedValue);
+      $scope.tvPlayTableParams.page(1);
+      $scope.tvPlayTableParams.reload();
     };
 
 
@@ -62,7 +66,7 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.clearSearch = function() {
       $scope.search.string = '';
     };
-    $scope.search = function() {
+    $scope.goSearch = function() {
       apiParams.searchKeyword = $scope.search.string;
       $scope.foldersTableParams.page(1);
       $scope.foldersTableParams.reload();
@@ -120,8 +124,10 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
             items = resData.items;
           filterData = resData.filters;
 
-          $scope.filterData = dataConverter.simpleFilter(filterData);
-          $scope.filterModel = $scope.filterData.defaultOption;
+          if(!$scope.selectOptions) {
+            //only assign at first time, because it would cause dpMultiDropdown model change and reset default value
+            $scope.selectOptions = filterData;
+          }
 
           $scope.items = items;
           $scope.listTotal = resData.total;

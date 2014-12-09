@@ -390,6 +390,10 @@ select {
 .table-footer-btn-wrap {
   padding-top: 21px; }
 
+/* line 21, ../scss/partials/_list.scss */
+.list-table-actions-col {
+  min-width: 180px; }
+
 /**reset**/
 /* line 2, ../scss/partials/_dialog.scss */
 .modal-content {
@@ -603,15 +607,16 @@ cc-tree li i, cc-tree li .tree-label {
   margin-right: 8px; }
 /* line 6, ../scss/partials/_filter.scss */
 .filter-wrap select {
-  background: #eeeeee; }
+  background: #eeeeee;
+  margin-right: 6px; }
 
-/* line 11, ../scss/partials/_filter.scss */
+/* line 12, ../scss/partials/_filter.scss */
 .list-top .form-inline .form-control {
   background: #eee; }
-/* line 14, ../scss/partials/_filter.scss */
+/* line 15, ../scss/partials/_filter.scss */
 .list-top .input-group-btn button {
   background: #efefef; }
-/* line 16, ../scss/partials/_filter.scss */
+/* line 17, ../scss/partials/_filter.scss */
 .list-top .input-group-btn button:hover {
   background: #28B779;
   border-color: #ccc; }

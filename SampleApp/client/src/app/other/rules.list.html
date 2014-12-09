@@ -13,7 +13,7 @@
       <div class="form-group">
         <div class="input-group">
           <input class="form-control" type="text" ng-model="search.string">
-          <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="search()"></span>
+          <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
         
           <th>上映时间</th>
         
-          <th>Actions</th>
+        
         </tr>
       </thead>
       <tbody>
@@ -76,9 +76,7 @@
           <td>{{item.release_time}}</td>
         
       
-          <td data-title="'Actions'" width="180">
-            <a href="" class="btn btn-default" ng-click="saveItem(item)">save</a>
-          </td>
+      
         </tr>
       </tbody>
     </table>

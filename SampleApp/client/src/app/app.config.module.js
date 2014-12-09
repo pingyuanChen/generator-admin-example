@@ -12,8 +12,8 @@ define(function() {
         basePath: '/admin'
       },
       'release': {
-        domain: '/admin',
-        basePath: 'http://172.16.77.30'
+        domain: 'http://172.16.77.30',
+        basePath: '/admin'
       }
     })
     .constant('ENV', 'development')
