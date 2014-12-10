@@ -189,12 +189,16 @@
                     <table class="table table-bordered ref-table ref-rules">
                       <thead>
                         <tr>
+                          <th>Order</th>
                           <th>rules</th>
                           <th>Delete?</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr ng-repeat="refItem in entity.rules">
+                          <td>
+                            <input type="text" class="form-control inline-ref-order-cell" ng-model="refItem.order">
+                          </td>
                           <td>
                             <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem['title']">
                             <div class="ref-btn-wrap">
@@ -208,6 +212,9 @@
                           </td>
                         </tr>
                         <tr>
+                          <td>
+                            <input type="text" class="form-control inline-ref-order-cell" ng-model="entity.rules[entity.rules.length]['order']">
+                          </td>
                           <td>
                             <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.rules[entity.rules.length]['title']">
                             <div class="ref-btn-wrap">
@@ -247,12 +254,16 @@
                     <table class="table table-bordered ref-table ref-folders">
                       <thead>
                         <tr>
+                          <th>Order</th>
                           <th>folders</th>
                           <th>Delete?</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr ng-repeat="refItem in entity.folders">
+                          <td>
+                            <input type="text" class="form-control inline-ref-order-cell" ng-model="refItem.order">
+                          </td>
                           <td>
                             <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem['title']">
                             <div class="ref-btn-wrap">
@@ -266,6 +277,9 @@
                           </td>
                         </tr>
                         <tr>
+                          <td>
+                            <input type="text" class="form-control inline-ref-order-cell" ng-model="entity.folders[entity.folders.length]['order']">
+                          </td>
                           <td>
                             <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.folders[entity.folders.length]['title']">
                             <div class="ref-btn-wrap">
