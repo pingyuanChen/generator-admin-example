@@ -887,15 +887,15 @@ input[type=checkbox] {
   margin-left: 0; }
 
 /* line 79, ../scss/app.scss */
-.popup .leftnav {
+.popup .leftnav, .popup .app-header {
   display: none; }
 
-/* line 84, ../scss/app.scss */
+/* line 85, ../scss/app.scss */
 .search-wrap .form-control-feedback {
   top: 1px;
   border-left: 1px solid #ddd;
   line-height: 34px; }
-/* line 89, ../scss/app.scss */
+/* line 90, ../scss/app.scss */
 .search-wrap .form-control-feedback:hover {
   background: #5cb85c;
   color: #fff; }

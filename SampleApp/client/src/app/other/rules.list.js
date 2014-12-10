@@ -24,16 +24,15 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.edit = function(item) {
       if($location.search().popup) {
         var windowScope = $window.opener.angular.element('body').scope(),
-          childWindowName = $window.window.name;
-
+          childWindowName = $window.name,
+          childWindowLabel = $location.search().label || 'id',
+          broadcastData = {};
+        broadcastData.id = item.id;
+        broadcastData[childWindowLabel] = item[childWindowLabel];
         if(childWindowName == 'from-ref') {
-          windowScope.$broadcast('REF_LIST_SELECTED', {
-            id: item.id
-          });
+          windowScope.$broadcast('REF_LIST_SELECTED', broadcastData);
         } else {
-          windowScope.$broadcast('INLINE_REF_LIST_SELECTED', {
-            id: item.id
-          });
+          windowScope.$broadcast('INLINE_REF_LIST_SELECTED', broadcastData);
         }
         $window.close();
       }
@@ -54,12 +53,11 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
 
 
 
-    $scope.filter = function(node, isInit) {
-      if(!isInit) {
-        _.extend(apiParams, node.selectedValue);
-        $scope.rulesTableParams.page(1);
-        $scope.rulesTableParams.reload();
-      }
+    $scope.filter = function(node) {
+      var selectedValue = node.selectedValue;
+      _.extend(apiParams, selectedValue);
+      $scope.tvPlayTableParams.page(1);
+      $scope.tvPlayTableParams.reload();
     };
 
 
@@ -125,10 +123,9 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
             items = resData.items;
           filterData = resData.filters;
 
-          if(!$scope.selectName) {
-            var convertedData = dataConverter.filter(filterData);
-            $scope.selectName = convertedData.selectName;
-            $scope.selectOptions = convertedData.selectOptions;
+          if(!$scope.selectOptions) {
+            //only assign at first time, because it would cause dpMultiDropdown model change and reset default value
+            $scope.selectOptions = filterData;
           }
 
           $scope.items = items;

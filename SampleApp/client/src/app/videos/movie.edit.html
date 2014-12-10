@@ -86,8 +86,8 @@
                   
 
                   
-                    <input type="text" class="form-control" ng-model="entity.categories">
-                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUpList('novels', 'categories')"></span>
+                    <input type="text" class="form-control" ng-model="entity.categories.title">
+                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUpList('novels', 'categories', 'title')"></span>
                   
                   </div>
                 </div>
@@ -196,9 +196,9 @@
                       <tbody>
                         <tr ng-repeat="refItem in entity.rules">
                           <td>
-                            <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem.id">
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem['title']">
                             <div class="ref-btn-wrap">
-                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', $index)"></span>
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', $index, 'title')"></span>
                               <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'other', 'rules', $index, refItem.id)"></span>
                               <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'rules', $index)"></span>
                             </div>
@@ -209,9 +209,9 @@
                         </tr>
                         <tr>
                           <td>
-                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.rules[entity.rules.length].id">
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.rules[entity.rules.length]['title']">
                             <div class="ref-btn-wrap">
-                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', entity.rules.length)"></span>
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', entity.rules.length, 'title')"></span>
                               <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.rules.length.id" ng-click="popUp('edit', 'other', 'rules', entity.rules.length, entity.rules.length.id)"></span>
                               <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'rules', entity.rules.length)"></span>
                             </div>
@@ -254,9 +254,9 @@
                       <tbody>
                         <tr ng-repeat="refItem in entity.folders">
                           <td>
-                            <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem.id">
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="refItem['title']">
                             <div class="ref-btn-wrap">
-                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', $index)"></span>
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', $index, 'title')"></span>
                               <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'other', 'folders', $index, refItem.id)"></span>
                               <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'folders', $index)"></span>
                             </div>
@@ -267,9 +267,9 @@
                         </tr>
                         <tr>
                           <td>
-                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.folders[entity.folders.length].id">
+                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.folders[entity.folders.length]['title']">
                             <div class="ref-btn-wrap">
-                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', entity.folders.length)"></span>
+                              <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', entity.folders.length, 'title')"></span>
                               <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.folders.length.id" ng-click="popUp('edit', 'other', 'folders', entity.folders.length, entity.folders.length.id)"></span>
                               <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'folders', entity.folders.length)"></span>
                             </div>
