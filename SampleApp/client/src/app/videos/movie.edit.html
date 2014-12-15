@@ -189,7 +189,7 @@
                     <table class="table table-bordered ref-table ref-rules">
                       <thead>
                         <tr>
-                          <th>Order</th>
+                          <th width="160">Order</th>
                           <th>rules</th>
                           <th>Delete?</th>
                         </tr>
@@ -219,7 +219,7 @@
                             <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.rules[entity.rules.length]['title']">
                             <div class="ref-btn-wrap">
                               <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'rules', entity.rules.length, 'title')"></span>
-                              <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.rules.length.id" ng-click="popUp('edit', 'other', 'rules', entity.rules.length, entity.rules.length.id)"></span>
+                              <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.rules[entity.rules.length]['id']" ng-click="popUp('edit', 'other', 'rules', entity.rules.length, entity.rules[entity.rules.length]['id'])"></span>
                               <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'rules', entity.rules.length)"></span>
                             </div>
                           </td>
@@ -254,7 +254,7 @@
                     <table class="table table-bordered ref-table ref-folders">
                       <thead>
                         <tr>
-                          <th>Order</th>
+                          <th width="160">Order</th>
                           <th>folders</th>
                           <th>Delete?</th>
                         </tr>
@@ -284,7 +284,7 @@
                             <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.folders[entity.folders.length]['title']">
                             <div class="ref-btn-wrap">
                               <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'other', 'folders', entity.folders.length, 'title')"></span>
-                              <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.folders.length.id" ng-click="popUp('edit', 'other', 'folders', entity.folders.length, entity.folders.length.id)"></span>
+                              <span class="glyphicon glyphicon-pencil" ng-disabled="!entity.folders[entity.folders.length]['id']" ng-click="popUp('edit', 'other', 'folders', entity.folders.length, entity.folders[entity.folders.length]['id'])"></span>
                               <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'other', 'folders', entity.folders.length)"></span>
                             </div>
                           </td>

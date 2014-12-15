@@ -96,8 +96,8 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.filter = function(node) {
       var selectedValue = node.selectedValue;
       _.extend(apiParams, selectedValue);
-      $scope.tvPlayTableParams.page(1);
-      $scope.tvPlayTableParams.reload();
+      $scope.categoriesTableParams.page(1);
+      $scope.categoriesTableParams.reload();
     };
 
 
