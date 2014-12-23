@@ -54,10 +54,9 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
 
 
     $scope.filter = function(node, isInit) {
+      _.extend(apiParams, node.selectedValue);
       if(!isInit) {
-        _.extend(apiParams, node.selectedValue);
-        $scope.novelTableParams.page(1);
-        $scope.novelTableParams.reload();
+        reloadChart();
       }
     };
 

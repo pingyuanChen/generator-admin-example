@@ -1,0 +1,65 @@
+<div class="chart">
+  <div class="chart-head">
+  
+    <div class="list-datepicker right">
+      <div class="date-selected">
+        <span class="input-group date-picker-select">
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt" max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" ng-required="true"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)"> <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+          </span>
+        </span>
+        <label  class="date-picker-text">—</label>
+        <span class="input-group date-picker-select end-date">
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt" min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened" show-button-bar="false" ng-required="true"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)"> <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+          </span>
+        </span>
+      </div>
+    </div>
+  
+    <div class="filter-wrap left">
+    
+      <cascade-dropdown selected-model="selectOptions" select-name="selectName" on-selected="filter(node, isInit)"></cascade-dropdown>
+    
+    </div>
+
+  
+    <div class="search-wrap left">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" type="text" ng-model="search.string">
+          <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  <div class="chart-content">
+  
+    <div class="widget-box">
+      <div class="widget-title" ng-click="isCollapse0 = !isCollapse0">
+        <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+        <h5>Stability</h5>
+      </div>
+      <div class="widget-content" collapse="isCollapse0">
+        <dp-highchart chart-config="chartConfig0"></dp-highchart>
+      </div>
+    </div>
+  
+    <div class="widget-box">
+      <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+        <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+        <h5>Distribution</h5>
+      </div>
+      <div class="widget-content" collapse="isCollapse1">
+        <dp-highchart chart-config="chartConfig1"></dp-highchart>
+      </div>
+    </div>
+  
+
+  </div>
+</div>

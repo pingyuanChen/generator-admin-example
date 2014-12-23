@@ -1,0 +1,62 @@
+{
+  "moduleName": "reportModule",
+  "modelName": "stability",
+  "filter_type": "cascade-dropdown",
+  "charts": [
+    {
+      "title": "Stability",
+      "yAxis": [
+        {
+          "title": "User Call Limited"
+        },
+        {
+          "title": "Temperature",
+          "opposite": true
+        }
+      ],
+      "display": [
+        {
+          "name": "count",
+          "alias": "Time per request",
+          "type": "column",
+          "suffix": "mm",
+          "yAxis": 1
+        },
+        {
+          "name": "mobile_rate",
+          "alias": "User Call Limited",
+          "type": "column",
+          "suffix": "k"
+        },
+        {
+          "name": "avg_time",
+          "alias": "success rate-mobile",
+          "type": "spline"
+        },
+        {
+          "name": "wifi_rate",
+          "alias": "sucess rate-wifi",
+          "type": "column"
+        }
+      ]
+    },
+    {
+      "type": "pie",
+      "title": "Distribution",
+      "display": [
+        {
+          "name": "consumption",
+          "alias": "Total Consumption",
+          "center": [350, 150],
+          "size": 250
+        },
+        {
+          "name": "apple",
+          "alias": "2011",
+          "center": [1050, 150],
+          "size": 250
+        }
+      ]
+    }
+  ]
+}

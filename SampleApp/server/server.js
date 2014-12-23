@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(compression());
 app.use(cors());
 app.use(logger('dev'));
-app.use('/', express.static(path.join(__dirname, '../client/')));
+app.use('/', express.static(path.join(__dirname, '../client/src/')));
 
 router.use(function(req, res, next) {
   res.set({

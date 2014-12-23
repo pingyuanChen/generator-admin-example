@@ -113,11 +113,11 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
     $scope.viewDetail = function(item) {};
 
 
-    $scope.filter = function(node) {
-      var selectedValue = node.selectedValue;
-      _.extend(apiParams, selectedValue);
-      $scope.movieTableParams.page(1);
-      $scope.movieTableParams.reload();
+    $scope.filter = function(node, isInit) {
+      _.extend(apiParams, node.selectedValue);
+      if(!isInit) {
+        reloadChart();
+      }
     };
 
 

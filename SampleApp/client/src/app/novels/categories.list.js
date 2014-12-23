@@ -93,11 +93,11 @@ define(['common/utils/date', 'common/utils/dataConverter'], function(dateUtil, d
 
 
 
-    $scope.filter = function(node) {
-      var selectedValue = node.selectedValue;
-      _.extend(apiParams, selectedValue);
-      $scope.categoriesTableParams.page(1);
-      $scope.categoriesTableParams.reload();
+    $scope.filter = function(node, isInit) {
+      _.extend(apiParams, node.selectedValue);
+      if(!isInit) {
+        reloadChart();
+      }
     };
 
 

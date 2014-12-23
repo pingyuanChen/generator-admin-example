@@ -14,8 +14,9 @@ define([
   'novels/novels.module',
   'other/other.module',
   'videos/videos.module',
-  'musics/musics.module'
-], function(appConfig, services, widgets, filters, auth, ds, layouts, novels, other, videos, musics) /*invoke*/ {
+  'musics/musics.module',
+  'reportModule/reportModule.module'
+], function(appConfig, services, widgets, filters, auth, ds, layouts, novels, other, videos, musics, reportModule) /*invoke*/ {
   'use strict';
 
   var appMod = angular.module('app', [
@@ -34,7 +35,8 @@ define([
     novels,
     other,
     videos,
-    musics
+    musics,
+    reportModule
   ]); /*ngDeps*/
   return 'app';
 });
